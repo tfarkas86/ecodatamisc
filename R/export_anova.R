@@ -1,3 +1,18 @@
+#' Title
+#'
+#' @param model
+#' @param file
+#' @param pnames
+#' @param alpha
+#' @param boldsig
+#' @param digits
+#' @param align
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 export_anova <- function(model, file = NULL, pnames = NULL, alpha = 0.05,
                          boldsig = TRUE, digits = c(1, 2, 1, 4),
                          align = c("l", "r", "r", "r"), ...) {
@@ -20,38 +35,30 @@ export_anova <- function(model, file = NULL, pnames = NULL, alpha = 0.05,
   #   # type = 3 will change to type 3 ANOVA
   #   # lot of potential options to kable!
 
-  # dependencies
-  require(MASS)
-  require(car)
-  require(dplyr)
-  require(purrr)
-  require(stringr)
-  require(kableExtra)
-  require(magick)
-
-  antable <- Anova(model, ...) %>%
-    as_tibble(rownames = "Parameter")
+  antable <- car::Anova(model, ...) %>%
+    tibble::as_tibble(rownames = "Parameter")
 
   pnamelist <- if(!is.null(pnames)) {
-    as.list(pnames[,2]) %>% set_names(pnames[,1])
-  } else { as.list(antable$Parameter) %>% set_names(antable$Parameter) }
+    as.list(pnames[,2]) %>% rlang::set_names(pnames[,1])
+  } else { as.list(antable$Parameter) %>%
+      rlang::set_names(antable$Parameter) }
   # TODO: allow vector of new names?
 
   latex_out <- antable %>%
-    set_names(c("Parameter", "$\\chi^2$", "DF", "pvaluetemp")) %>%
-    mutate(across(Parameter, ~ dplyr::recode(.x, !!!pnamelist))) %>%
-    mutate(across(Parameter, ~ str_replace_all(.x, "_", "\\\\_"))) %>% # wow this is a serious hack
+    rlang::set_names(c("Parameter", "$\\chi^2$", "DF", "pvaluetemp")) %>%
+    dplyr::mutate(dplyr::across(Parameter, ~ dplyr::recode(.x, !!!pnamelist))) %>%
+    dplyr::mutate(dplyr::across(Parameter, ~ stringr::str_replace_all(.x, "_", "\\\\_"))) %>% # wow this is a serious hack
     # TODO: Add more special character exceptions
-    mutate("pvalue" = ifelse(.[[4]] < 10^-digits[4],
+    dplyr::mutate("pvalue" = ifelse(.[[4]] < 10^-digits[4],
                              paste0("< ", format(10^-digits[4], scientific = FALSE)),
                              format(round(.[[4]], digits[4]), scientific = FALSE))) %>%
-    mutate(across(pvalue, ~ cell_spec(.x, bold = ifelse(pvaluetemp < alpha & boldsig,
+    dplyr::mutate(dplyr::across(pvalue, ~ kableExtra::cell_spec(.x, bold = ifelse(pvaluetemp < alpha & boldsig,
                                                         TRUE, FALSE), format = "latex"))) %>%
     dplyr::select(-4) %>%
     dplyr::rename("$P$-value" = pvalue) %>%
-    kable("latex", booktabs = TRUE, linesep = "", escape = FALSE,
+    knitr::kable("latex", booktabs = TRUE, linesep = "", escape = FALSE,
           digits = digits, align = align, ...) %>%
-    add_footnote(notation = "symbol", ...)
+    kableExtra::add_footnote(notation = "symbol", ...)
 
   if(!is.null(file)) kableExtra::save_kable(x = latex_out, file = file)
   else return(latex_out)
