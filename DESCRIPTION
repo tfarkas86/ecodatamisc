@@ -4,7 +4,7 @@ Title: EcoData Technologies
 Version: 0.1.0
 Author: Tim Farkas, Rob Clark
 Maintainer: Tim Farkas <timothy.farkas@gmail.com>
-Description: Miscellaneous functions
+Description: Miscellaneous functions to facilitate work at Ecodata Technology, LLC.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -12,3 +12,12 @@ RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Imports: 
+    knitr,
+    car,
+    dplyr,
+    kableExtra,
+    stringr,
+    tibble,
+    rlang,
+    magrittr

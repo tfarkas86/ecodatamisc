@@ -2,25 +2,50 @@
 % Please edit documentation in R/export_anova.R
 \name{export_anova}
 \alias{export_anova}
-\title{Title}
+\title{Export an ANOVA model summary as a pretty table.}
 \usage{
 export_anova(
   model,
   file = NULL,
-  pnames = NULL,
+  par_names = NULL,
   alpha = 0.05,
-  boldsig = TRUE,
+  bold_sig = TRUE,
   digits = c(1, 2, 1, 4),
   align = c("l", "r", "r", "r"),
+  keep_tex = FALSE,
   ...
 )
 }
 \arguments{
-\item{...}{}
+\item{model}{A model object.}
+
+\item{file}{A file-path destination for your table, with extensions pdf or png. Using a value of NULL will return the LaTeX code for the table.}
+
+\item{par_names}{A character vector of variable names to replace the model object defaults.}
+
+\item{alpha}{A numeric from 0 to 1 for boldface identification of significant predictors. Default; 0.05.}
+
+\item{bold_sig}{A logical indicating whether to put p-values for significant predictors in bold-face type. Default: TRUE.}
+
+\item{digits}{An integer vector denoting the number of significant digits to print for each of the numeric table fields. Default: c(1, 2, 1, 4).}
+
+\item{align}{A character vector denoting alignment for each of the table fields. "l", "c", and "r" denote left, center, and right, respectively. Default: c("l", "r", "r", "r").}
+
+\item{keep_tex}{A logical to save the .tex file. Default: FALSE.}
+
+\item{...}{Additional arguments to be passed to car::Anova, knitr::kable, and kableExtra::add_footnote.}
 }
 \value{
 
 }
 \description{
-Title
+Export an ANOVA model summary as a pretty table.
+}
+\examples{
+
+mod <- glm(Sepal.Length ~ Sepal.Width + Petal.Length, data = iris)
+renames <- data.frame(old = c("Sepal.Width", "Petal.Length"),
+                     new = c("Sepal Width", "Petal Length"))
+file <- "test_table.pdf"
+export_anova(mod = mod, file = file, par_names = renames)
 }
