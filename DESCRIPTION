@@ -20,4 +20,6 @@ Imports:
     stringr,
     tibble,
     rlang,
-    magrittr
+    magrittr,
+    tidyr,
+    tidymv
