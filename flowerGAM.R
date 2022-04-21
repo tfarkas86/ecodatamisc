@@ -25,3 +25,17 @@ summary(gam2018)
 
 # plot with plot_gam
 gamplot(gam2018, ylab = "Total Flowers", xlab = "Julian Day (2018)", ylims = c(0, 400))
+
+
+#### Pollination Timing ####
+
+hp_dat <- read_csv("./Data/Output/Hand_Pollination.csv") %>%
+  filter(Pollination_Timing %in% c("early", "middle", "late"))
+
+hp_dat%>%
+  group_by(Year, Pollination_Week) %>%
+  summarize(date_min = yday(min(Pollination_Date)),
+            date_max = yday(max(Pollination_Date))) %>%
+  mutate(Pol_Timing = recode(Pollination_Week,
+                             Week_1 = "early", Week_2 = "middle", Week_3 = "late"),
+         .after = "Pollination_Week")
