@@ -27,7 +27,7 @@ get_daymet(
 
 \item{vars:}{string of variables to get for the site}
 
-\item{use_last_year:}{set max year to last year, there may not be data for last year}
+\item{use_this_year:}{set max year to this year, though there might not be complete data}
 }
 \value{
 A data.frame of Daymet data for a given site

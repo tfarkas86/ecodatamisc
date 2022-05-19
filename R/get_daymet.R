@@ -6,7 +6,7 @@
 #'@param start: start of the range of years over which to download data
 #'@param end: end of the range of years over which to download data
 #'@param vars: string of variables to get for the site
-#'@param use_last_year: set max year to last year, there may not be data for last year
+#'@param use_this_year: set max year to this year, though there might not be complete data
 #'
 #' @return A data.frame of Daymet data for a given site
 #' @export
