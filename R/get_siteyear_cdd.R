@@ -19,7 +19,7 @@ get_siteyear_cdd <- function(data, ub, lb){
       if(year == year(today())){
         get_daymet(site = "DummySite", lat = latitude, lon = longitude,
                    start = year-1, end = year,
-                   use_last_year = T,
+                   use_this_year = T,
                    vars = "tmax,tmin") %>%
           .$data %>%
           filter(year == year) %>%
@@ -29,7 +29,7 @@ get_siteyear_cdd <- function(data, ub, lb){
 
       get_daymet(site = "DummySite", lat = latitude, lon = longitude,
                  start = year, end = year,
-                 use_last_year = F,
+                 use_this_year = F,
                  vars = "tmax,tmin") %>%
         .$data %>%
         select(yday, starts_with("t"))
