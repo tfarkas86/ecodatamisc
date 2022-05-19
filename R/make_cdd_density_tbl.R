@@ -7,9 +7,9 @@
 #' @import dplyr
 #' @importFrom magrittr %>%
 #'
-make_cdd_density_tbl <- function(data){
+make_cdd_density_tbl <- function(data, bw = "SJ-dpi"){
 
-  dens <- density(data[["cdd"]], na.rm = T)
+  dens <- density(data[["cdd"]], na.rm = T, bw = bw)
   tibble(cdd = dens[["x"]], dens = dens[["y"]]) %>%
     filter(cdd > 0, cdd < max(data[["cdd"]], na.rm = T))
 }

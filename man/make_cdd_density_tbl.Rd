@@ -4,7 +4,7 @@
 \alias{make_cdd_density_tbl}
 \title{Manually generate kernel density estimates for a range of CDD values, truncated to 0 CDD and the max CDD value in the input data.}
 \usage{
-make_cdd_density_tbl(data)
+make_cdd_density_tbl(data, bw = "SJ-dpi")
 }
 \arguments{
 \item{data:}{data.frame with a cdd column}
