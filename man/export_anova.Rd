@@ -35,9 +35,6 @@ export_anova(
 
 \item{...}{Additional arguments to be passed to car::Anova, knitr::kable, and kableExtra::add_footnote.}
 }
-\value{
-
-}
 \description{
 Export an ANOVA model summary as a pretty table.
 }

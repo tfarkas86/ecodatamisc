@@ -2,4 +2,8 @@
 
 export(export_anova)
 export(plot_gam)
+export(theme_ecodata)
+export(theme_ecodata_dark)
+import(ggplot2)
+import(ggtext)
 importFrom(magrittr,"%>%")
