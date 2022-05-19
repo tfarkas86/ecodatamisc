@@ -6,7 +6,7 @@
 #'@param start: start of the range of years over which to download data
 #'@param end: end of the range of years over which to download data
 #'@param vars: string of variables to get for the site
-#'@param use_this_year: set max year to this year, though there might not be complete data
+#'@param use_this_year: allow end year to be this year, though there might not be complete data
 #'
 #' @return A data.frame of Daymet data for a given site
 #' @export
@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' get_daymet()
-get_daymet <- function (site = "Daymet", lat = 36.0133, lon = -84.2625, start = 2000, end = as.numeric(format(Sys.time(), "%Y")) - 2, vars = "tmax,tmin,dayl,prcp,srad,swe,vp", use_this_year = F)
+get_daymet <- function (site = "Daymet", lat = 36.0133, lon = -84.2625, start = 2000, end = as.numeric(format(Sys.time(), "%Y")) - 1, vars = "tmax,tmin,dayl,prcp,srad,swe,vp", use_this_year = F)
 {
   url <- "https://daymet.ornl.gov/single-pixel/api/data"
 

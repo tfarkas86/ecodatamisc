@@ -9,7 +9,7 @@ get_daymet(
   lat = 36.0133,
   lon = -84.2625,
   start = 2000,
-  end = as.numeric(format(Sys.time(), "\%Y")) - 2,
+  end = as.numeric(format(Sys.time(), "\%Y")) - 1,
   vars = "tmax,tmin,dayl,prcp,srad,swe,vp",
   use_this_year = F
 )
@@ -27,7 +27,7 @@ get_daymet(
 
 \item{vars:}{string of variables to get for the site}
 
-\item{use_this_year:}{set max year to this year, though there might not be complete data}
+\item{use_this_year:}{allow end year to be this year, though there might not be complete data}
 }
 \value{
 A data.frame of Daymet data for a given site
