@@ -21,7 +21,6 @@ get_siteyear_cdd <- function(data, ub, lb){
                    start = year-1, end = year,
                    use_this_year = T,
                    vars = "tmax,tmin") %>%
-          .$data %>%
           filter(year == year) %>%
           select(yday, starts_with("t"))
 
@@ -31,7 +30,6 @@ get_siteyear_cdd <- function(data, ub, lb){
                  start = year, end = year,
                  use_this_year = F,
                  vars = "tmax,tmin") %>%
-        .$data %>%
         select(yday, starts_with("t"))
     }, otherwise = data.frame(NULL))))
 
@@ -46,3 +44,4 @@ get_siteyear_cdd <- function(data, ub, lb){
     select(-tavg, -dd) %>%
     ungroup()
 }
+
