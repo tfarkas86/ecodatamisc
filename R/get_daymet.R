@@ -25,10 +25,10 @@ get_daymet <- function (site = "Daymet", lat = 36.0133, lon = -84.2625, start = 
     max_year <- as.numeric(format(Sys.time(), "%Y"))
   }
   if (start < 1980) {
-    stop("Data starts in 1980, can't go earlier")
+    stop("Data starts in 1980, you tried to get earlier data.")
   }
   if (end > max_year) {
-    stop("You've exceeded the maximum year")
+    stop("You've exceeded the maximum year.")
   }
 
   years <- paste(seq(start, end, by = 1), collapse = ",")
