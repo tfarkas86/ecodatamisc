@@ -5,6 +5,7 @@
   sysfonts::font_add_google("Lexend Deca", "Lexend Deca Light", regular.wt = 300)
   sysfonts::font_add_google("Roboto Condensed", "Roboto Condensed")
   showtext::showtext_auto()
+  showtext::showtext_opts(dpi = 300)
 }
 
 .onAttach <- function(libname, pkgname){
