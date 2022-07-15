@@ -1,8 +1,8 @@
 #' @import sysfonts showtext
 .onLoad <- function(libname, pkgname){
   sysfonts::font_add_google("Lexend Deca", "LexendDecaSemiBold", regular.wt = 600)
-  sysfonts::font_add_google("Lexend Deca", "LexendDecaThin", regular.wt = 100)
-  sysfonts::font_add_google("Lexend Deca", "LexendDecaLight", regular.wt = 300)
+  sysfonts::font_add_google("Lexend Deca", "LexendDecaThin", regular.wt = 200)
+  sysfonts::font_add_google("Lexend Deca", "LexendDecaLight", regular.wt = 400)
   sysfonts::font_add_google("Roboto Condensed", "RobotoCondensed")
   showtext::showtext_auto()
   showtext::showtext_opts(dpi = 300)
