@@ -7,5 +7,5 @@ Install to R directly from GitHub.
 
 ```
 install.packages("devtools")
-devtools::install_github("tfarkas86/ecodatamisc")
+devtools::install_github("ecodata-technology/ecodatamisc")
 ```
