@@ -5,10 +5,10 @@
 \title{A light ggplot theme for EcoData Technology}
 \usage{
 theme_ecodata(
-  base_family = "Roboto Condensed Regular",
-  title_family = "Lexend Deca SemiBold",
-  subtitle_family = "Lexend Deca Thin",
-  axis_family = "Lexend Deca Light",
+  base_family = "RobotoCondensed",
+  title_family = "LexendDecaSemiBold",
+  subtitle_family = "LexendDecaThin",
+  axis_family = "LexendDecaLight",
   base_color = "gray10",
   primary_color = "#1b2724",
   accent_color = "#6eb39c",
