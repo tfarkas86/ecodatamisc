@@ -8,6 +8,7 @@ library(terra)
 r <- rast(matrix(0, nrow = 100, ncol = 100))
 r[11:60, 11:60] <- 1
 r[76:95, 76:95] <- 2
+r[76:95, 11:30] <- 3
 ```
 
 ```{r}
@@ -39,7 +40,7 @@ while(length(which(r_out[] == 0)) > 0) {
     new_cell = sample(adj[[paste0(group)]], 1)
     r_out[new_cell] <- group
 
-    # remove cell from list of 0s from both groups
+    # remove cell from list of 0s from all groups
     for (g in unq[-1]) {
         if (length(which(adj[[paste0(g)]] == new_cell)) == 0) next 
         adj[[paste0(g)]] <- adj[[paste0(g)]][-which(adj[[paste0(g)]] == new_cell)]
