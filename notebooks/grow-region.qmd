@@ -1,0 +1,54 @@
+```{r}
+#| label: import
+library(terra) 
+```
+
+```{r}
+#| label: create raster with two objects
+r <- rast(matrix(0, nrow = 100, ncol = 100))
+r[11:60, 11:60] <- 1
+r[76:95, 76:95] <- 2
+```
+
+```{r}
+#| label: determine adjacency of all zeros to ones and twos
+adj <- list()
+zero_cells <- which(r[] == 0)
+unq = unique(as.vector(r))
+for (i in unq) {
+    if (i == 0) next
+    cells <- which(r[] == i)
+    adj_i <- adjacent(r, cells, directions = "rook", pairs = TRUE)
+    adj[[paste0(i)]] <- adj_i[adj_i[,2] %in% zero_cells, 2]
+}
+```
+
+```{r}
+#| label: grow regions
+
+r_out <- r 
+props_area <- (table(as.vector(r))/sum(table(as.vector(r))[-1]))[-1]
+props_perim <- c(lapply(adj, length), recursive = TRUE) / sum(c(lapply(adj, length), recursive = TRUE))
+while(length(which(r_out[] == 0)) > 0) {
+
+# for(i in 1:100) {
+
+    # grow by one cell
+    group <- sample(unq[-1], 1, prob = props_area)
+    if (length(adj[[paste0(group)]]) == 0) next #skip if empty
+    new_cell = sample(adj[[paste0(group)]], 1)
+    r_out[new_cell] <- group
+
+    # remove cell from list of 0s from both groups
+    for (g in unq[-1]) {
+        if (length(which(adj[[paste0(g)]] == new_cell)) == 0) next 
+        adj[[paste0(g)]] <- adj[[paste0(g)]][-which(adj[[paste0(g)]] == new_cell)]
+    }
+
+    # add new adjacencies
+    new_adj <- adjacent(r_out, new_cell, directions = "rook", pairs = TRUE)
+
+    adj[[paste0(group)]] <- c(adj[[paste0(group)]], new_adj[which(r_out[new_adj[,2]] == 0), 2])
+}
+```
+
